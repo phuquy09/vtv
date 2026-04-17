@@ -1268,6 +1268,29 @@
 
 <script>
     // Hàm này để hiện sảnh
+ <div id="vtv-vip-portal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.95); z-index:999999; backdrop-filter:blur(15px); color:white; font-family:Arial, sans-serif; overflow-y:auto;">
+    <div style="text-align:center; padding:50px 20px;">
+        <h1 style="color:#ed1c24; text-shadow: 0 0 10px red;">VTV S14 VIP SYSTEM</h1>
+        <p id="v-news" style="font-family:monospace; color:#0f0; height:20px;">SYSTEM READY...</p>
+        
+        <div style="display:flex; justify-content:center; gap:10px; height:80px; margin:30px 0; align-items:flex-end;">
+            <div id="vs-1" style="width:15px; background:#ed1c24; height:30%; transition:0.2s;"></div>
+            <div id="vs-2" style="width:15px; background:#ed1c24; height:60%; transition:0.2s;"></div>
+            <div id="vs-3" style="width:15px; background:#ed1c24; height:90%; transition:0.2s;"></div>
+            <div id="vs-4" style="width:15px; background:#ed1c24; height:50%; transition:0.2s;"></div>
+        </div>
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; max-width:300px; margin:0 auto;">
+            <button onclick="vVipPlay('TAI')" style="padding:15px; background:#ed1c24; border:none; color:white; font-weight:bold; cursor:pointer;">TÀI</button>
+            <button onclick="vVipPlay('XIU')" style="padding:15px; background:#333; border:none; color:white; font-weight:bold; cursor:pointer;">XỈU</button>
+        </div>
+        
+        <button onclick="document.getElementById('vtv-vip-portal').style.display='none'" style="margin-top:40px; background:none; border:1px solid #555; color:#888; padding:5px 15px; cursor:pointer;">THOÁT</button>
+    </div>
+</div>
+
+<script>
+    // Hàm này để hiện sảnh
     function openVTVVIP() {
         const p = document.getElementById('vtv-vip-portal');
         if(p) p.style.display = 'block';
