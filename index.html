@@ -355,6 +355,11 @@
                 <i class="icon">🦀</i>BẦU CUA THẦN TÀI
 
             </div>
+             <div class="vtv-entry" onclick="openVTVVIP()" style="cursor:pointer; perspective: 1000px;">
+    <div style="background: linear-gradient(135deg, #ed1c24, #0054a6); padding: 15px; border-radius: 20px; border: 2px solid #fff; box-shadow: 0 0 20px rgba(237, 28, 36, 0.6); transition: 0.3s;" onmouseover="this.style.transform='scale(1.1) rotateY(10deg)'" onmouseout="this.style.transform='scale(1)'">
+        <div style="font-weight: 900; color: white; font-size: 20px; text-shadow: 2px 2px #000;">VTV <span style="font-size: 10px; display: block;">DIGITAL CASINO</span></div>
+    </div>
+</div>
 
             <div class="game-card gold-border" onclick="openGame('ba')" style="background: linear-gradient(145deg, #1a2030, #0a101d);">
 
@@ -1191,7 +1196,121 @@
     window.onload = updateUI;
 
 </script>
+<div id="vtv-vip-portal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.95); z-index:10000; backdrop-filter:blur(15px); font-family: 'Segoe UI', sans-serif; overflow-y: auto;">
+    
+    <div style="max-width: 450px; margin: 20px auto; border: 1px solid rgba(255,255,255,0.1); background: rgba(20,20,20,0.8); border-radius: 30px; padding: 25px; box-shadow: 0 0 50px #ed1c2433;">
+        
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 25px;">
+            <div>
+                <div style="color:#ed1c24; font-weight:900; font-size:22px; letter-spacing:2px;">VTV<span style="color:#fff">GO88</span></div>
+                <div style="color:#00f2ff; font-size:10px; font-family:monospace;">ENCRYPTED CONNECTION [S14-ACTIVE]</div>
+            </div>
+            <button onclick="document.getElementById('vtv-vip-portal').style.display='none'" style="background:#333; border:none; color:#fff; width:35px; height:35px; border-radius:50%; cursor:pointer;">✕</button>
+        </div>
 
+        <div style="background:#000; border-radius:15px; padding:15px; border:1px solid #333; position:relative; margin-bottom:20px;">
+            <div style="font-size:10px; color:#666; margin-bottom:10px; text-transform:uppercase;">Teleprompter Sentiment (Tài/Xỉu)</div>
+            <div style="height:40px; background:#050505; border-left:4px solid #00ff00; display:flex; align-items:center; padding:0 15px; overflow:hidden;">
+                <div id="v-news" style="color:#00ff00; font-weight:bold; font-family:monospace; font-size:16px;">READY TO BROADCAST...</div>
+            </div>
+            <div style="display:flex; gap:10px; margin-top:10px;">
+                <button onclick="vVipPlay('TAI')" style="flex:1; background:linear-gradient(to right, #ff9800, #ed6c02); border:none; padding:10px; color:#fff; font-weight:bold; border-radius:8px; cursor:pointer;">TÀI (Tích Cực)</button>
+                <button onclick="vVipPlay('XIU')" style="flex:1; background:linear-gradient(to right, #4e342e, #212121); border:none; padding:10px; color:#fff; font-weight:bold; border-radius:8px; cursor:pointer;">XỈU (Tiêu Cực)</button>
+            </div>
+        </div>
+
+        <div style="background:#000; border-radius:15px; padding:15px; border:1px solid #333; position:relative;">
+            <div style="font-size:10px; color:#666; margin-bottom:10px; text-transform:uppercase;">Frequency Equalizer (Chẵn/Lẻ)</div>
+            <div style="display:flex; justify-content:space-around; height:120px; align-items:flex-end; background:#080808; padding:10px; border-radius:10px;">
+                <div style="width:12%; height:100%; background:#111; border-radius:20px; position:relative;"><div id="vs-1" style="width:100%; position:absolute; bottom:0; background:linear-gradient(to top, #00f2ff, #0054a6); height:20%; border-radius:20px; transition:0.1s;"></div></div>
+                <div style="width:12%; height:100%; background:#111; border-radius:20px; position:relative;"><div id="vs-2" style="width:100%; position:absolute; bottom:0; background:linear-gradient(to top, #00f2ff, #0054a6); height:40%; border-radius:20px; transition:0.1s;"></div></div>
+                <div style="width:12%; height:100%; background:#111; border-radius:20px; position:relative;"><div id="vs-3" style="width:100%; position:absolute; bottom:0; background:linear-gradient(to top, #00f2ff, #0054a6); height:15%; border-radius:20px; transition:0.1s;"></div></div>
+                <div style="width:12%; height:100%; background:#111; border-radius:20px; position:relative;"><div id="vs-4" style="width:100%; position:absolute; bottom:0; background:linear-gradient(to top, #00f2ff, #0054a6); height:60%; border-radius:20px; transition:0.1s;"></div></div>
+            </div>
+            <div style="display:flex; gap:10px; margin-top:10px;">
+                <button onclick="vVipPlay('CHAN')" style="flex:1; background:#0054a6; border:none; padding:10px; color:#fff; font-weight:bold; border-radius:8px; cursor:pointer;">CHẴN (Cặp)</button>
+                <button onclick="vVipPlay('LE')" style="flex:1; background:#ed1c24; border:none; padding:10px; color:#fff; font-weight:bold; border-radius:8px; cursor:pointer;">LẺ (Đơn)</button>
+            </div>
+        </div>
+
+        <div style="margin-top:20px; border-top:1px solid #333; padding-top:10px;">
+            <marquee style="color:#gold; font-size:11px; font-family:monospace;">HỆ THỐNG TRUYỀN HÌNH GO88 VTV DIGITAL - KẾT NỐI SERVER S14 THÀNH CÔNG... CHÀO MỪNG QUÝ KHÁCH...</marquee>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Hàm mở Portal VIP
+    function openVTVVIP() {
+        document.getElementById('vtv-vip-portal').style.display = 'block';
+    }
+
+    var vVipRate = 35; // Tỉ lệ thắng mặc định
+
+    function vVipPlay(type) {
+        Swal.fire({
+            title: 'HỆ THỐNG VTV S14',
+            html: `<b style="color:#ed1c24">LỆNH ĐẶT: ${type}</b><br>Nhập mức cược kĩ thuật:`,
+            input: 'number',
+            background: '#111',
+            color: '#fff',
+            confirmButtonColor: '#ed1c24',
+            showCancelButton: true
+        }).then((res) => {
+            if(res.isConfirmed) {
+                let bet = parseInt(res.value);
+                // CHỖ NÀY QUÝ TỰ ĐỔI 'balance' THÀNH BIẾN TIỀN CỦA QUÝ
+                if(!bet || bet > balance) return Swal.fire('LỖI', 'Số dư không đủ!', 'error');
+                
+                balance -= bet;
+                if(window.updateUI) updateUI();
+
+                // Hiệu ứng Quét Sóng
+                let news = document.getElementById('v-news');
+                let timer = 0;
+                let loop = setInterval(() => {
+                    timer += 80;
+                    news.innerText = "SCANNING FREQUENCY: " + Math.floor(Math.random()*9999) + "MHz";
+                    for(let i=1; i<=4; i++) document.getElementById('vs-'+i).style.height = Math.random()*90+"%";
+                }, 80);
+
+                setTimeout(() => {
+                    clearInterval(loop);
+                    let win = (Math.random()*100) < vVipRate;
+                    
+                    let resultMsg, barLevel;
+                    // LOGIC TÍCH HỢP TÀI XỈU & CHẴN LẺ
+                    if(type === 'TAI' || type === 'XIU') {
+                        let taiMsgs = ["TĂNG TRƯỞNG VƯỢT BẬC", "KINH TẾ ĐI LÊN", "PHÁT TRIỂN THẦN TỐC"];
+                        let xiuMsgs = ["SỤT GIẢM NGHIÊM TRỌNG", "CẢNH BÁO BẢO TRÌ", "RỦI RO HỆ THỐNG"];
+                        
+                        if(type === 'TAI') resultMsg = win ? taiMsgs[0] : xiuMsgs[0];
+                        else resultMsg = win ? xiuMsgs[0] : taiMsgs[0];
+                        barLevel = win ? 4 : 1;
+                    } else {
+                        // Logic Chẵn Lẻ (Số cột chạm đỉnh)
+                        let isChan = (type === 'CHAN');
+                        barLevel = win ? (isChan ? 2 : 3) : (isChan ? 1 : 2);
+                        resultMsg = "TÍN HIỆU ỔN ĐỊNH";
+                    }
+
+                    // Hiển thị kết quả
+                    news.innerText = resultMsg;
+                    news.style.color = (resultMsg.includes("TĂNG") || resultMsg.includes("PHÁT") || resultMsg === "TÍN HIỆU ỔN ĐỊNH") ? "#0f0" : "#f00";
+                    for(let i=1; i<=4; i++) document.getElementById('vs-'+i).style.height = (i <= barLevel) ? "95%" : "15%";
+
+                    if(win) {
+                        balance += bet * 1.95;
+                        Swal.fire({ icon:'success', title:'HỢP LỆ', text:'Khớp lệnh VTV: ' + resultMsg, background:'#111', color:'#fff' });
+                    } else {
+                        Swal.fire({ icon:'error', title:'SAI LỆCH', text:'Tín hiệu lỗi: ' + resultMsg, background:'#111', color:'#fff' });
+                    }
+                    if(window.updateUI) updateUI();
+                }, 2500);
+            }
+        });
+    }
+</script>
 </body>
 
 </html>
