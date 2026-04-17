@@ -1291,27 +1291,37 @@
 
 <script>
     // Hàm này để hiện sảnh
+    <script>
     function openVTVVIP() {
+        console.log("Đang mở sảnh..."); // Dòng này để kiểm tra xem có ăn lệnh không
         const p = document.getElementById('vtv-vip-portal');
-        if(p) p.style.display = 'block';
+        if(p) {
+            p.style.display = 'block';
+        } else {
+            alert("Không tìm thấy sảnh VIP!");
+        }
     }
 
-    var vVipRate = 35; // Tỉ lệ thắng
+    var vVipRate = 35; 
 
     function vVipPlay(type) {
+        if(typeof Swal === 'undefined') return alert("Thiếu thư viện SweetAlert!");
+        
         Swal.fire({
             title: 'LỆNH VTV: ' + type,
             input: 'number',
             background: '#111', color: '#fff',
             confirmButtonText: 'CƯỢC NGAY',
-            didOpen: () => { document.querySelector('.swal2-container').style.zIndex = '1000001'; }
+            didOpen: () => { 
+                const swalContainer = document.querySelector('.swal2-container');
+                if(swalContainer) swalContainer.style.zIndex = '1000001'; 
+            }
         }).then((res) => {
-            if (!res.isConfirmed) return;
+            if (!res.isConfirmed || !res.value) return;
             let bet = parseInt(res.value);
 
-            // KIỂM TRA BIẾN TIỀN (Quý đổi 'balance' thành 'money' nếu web Quý dùng tên đó)
             if (!bet || bet <= 0 || bet > balance) {
-                return Swal.fire({title:'LỖI', text:'Tiền không đủ!', icon:'error', didOpen:()=>document.querySelector('.swal2-container').style.zIndex='1000001'});
+                return Swal.fire({title:'LỖI', text:'Tiền không đủ!', icon:'error', didOpen: () => { document.querySelector('.swal2-container').style.zIndex = '1000001'; }});
             }
 
             balance -= bet;
@@ -1319,25 +1329,27 @@
 
             let news = document.getElementById('v-news');
             let loop = setInterval(() => {
-                news.innerText = "SCANNING: " + Math.floor(Math.random()*9999) + "MHz";
-                for(let i=1; i<=4; i++) document.getElementById('vs-'+i).style.height = Math.random()*100+"%";
+                if(news) news.innerText = "SCANNING: " + Math.floor(Math.random()*9999) + "MHz";
+                for(let i=1; i<=4; i++) {
+                    let bar = document.getElementById('vs-'+i);
+                    if(bar) bar.style.height = Math.random()*100+"%";
+                }
             }, 70);
 
             setTimeout(() => {
                 clearInterval(loop);
                 let win = (Math.random()*100) < vVipRate;
-                news.innerText = win ? "KHỚP LỆNH!" : "LỖI TÍN HIỆU!";
+                if(news) news.innerText = win ? "KHỚP LỆNH!" : "LỖI TÍN HIỆU!";
                 
                 if (win) {
                     balance += bet * 1.95;
-                    Swal.fire({title:'THẮNG', icon:'success', didOpen:()=>document.querySelector('.swal2-container').style.zIndex='1000001'});
+                    Swal.fire({title:'THẮNG', icon:'success', didOpen: () => { document.querySelector('.swal2-container').style.zIndex = '1000001'; }});
                 } else {
-                    Swal.fire({title:'THUA', icon:'error', didOpen:()=>document.querySelector('.swal2-container').style.zIndex='1000001'});
+                    Swal.fire({title:'THUA', icon:'error', didOpen: () => { document.querySelector('.swal2-container').style.zIndex = '1000001'; }});
                 }
                 if (window.updateUI) updateUI();
             }, 2000);
         });
     }
 </script>
-</body>
 </html>
