@@ -1245,99 +1245,74 @@
     // 1. HÀM MỞ CỬA (Dùng để hiện sảnh VIP)
     <script>
     // 1. HÀM MỞ CỬA: Để cái nút VTV ở sảnh chính bấm vào là hiện sảnh VIP lên
+    <div id="vtv-vip-portal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.95); z-index:999999; backdrop-filter:blur(15px); color:white; font-family:Arial, sans-serif; overflow-y:auto;">
+    <div style="text-align:center; padding:50px 20px;">
+        <h1 style="color:#ed1c24; text-shadow: 0 0 10px red;">VTV S14 VIP SYSTEM</h1>
+        <p id="v-news" style="font-family:monospace; color:#0f0; height:20px;">SYSTEM READY...</p>
+        
+        <div style="display:flex; justify-content:center; gap:10px; height:80px; margin:30px 0; align-items:flex-end;">
+            <div id="vs-1" style="width:15px; background:#ed1c24; height:30%; transition:0.2s;"></div>
+            <div id="vs-2" style="width:15px; background:#ed1c24; height:60%; transition:0.2s;"></div>
+            <div id="vs-3" style="width:15px; background:#ed1c24; height:90%; transition:0.2s;"></div>
+            <div id="vs-4" style="width:15px; background:#ed1c24; height:50%; transition:0.2s;"></div>
+        </div>
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; max-width:300px; margin:0 auto;">
+            <button onclick="vVipPlay('TAI')" style="padding:15px; background:#ed1c24; border:none; color:white; font-weight:bold; cursor:pointer;">TÀI</button>
+            <button onclick="vVipPlay('XIU')" style="padding:15px; background:#333; border:none; color:white; font-weight:bold; cursor:pointer;">XỈU</button>
+        </div>
+        
+        <button onclick="document.getElementById('vtv-vip-portal').style.display='none'" style="margin-top:40px; background:none; border:1px solid #555; color:#888; padding:5px 15px; cursor:pointer;">THOÁT</button>
+    </div>
+</div>
+
+<script>
+    // Hàm này để hiện sảnh
     function openVTVVIP() {
-        var portal = document.getElementById('vtv-vip-portal');
-        if (portal) {
-            portal.style.display = 'block';
-        } else {
-            alert("Lỗi: Không tìm thấy sảnh VIP trong code HTML!");
-        }
+        const p = document.getElementById('vtv-vip-portal');
+        if(p) p.style.display = 'block';
     }
 
-    // 2. TỈ LỆ THẮNG (Sửa thành 80 hoặc 90 nếu Quý muốn "hack")
-    var vVipRate = 35; 
+    var vVipRate = 35; // Tỉ lệ thắng
 
-    // 3. HÀM ĐẶT CƯỢC SIÊU CẤP
     function vVipPlay(type) {
         Swal.fire({
-            title: 'HỆ THỐNG VTV S14',
-            html: `<b style="color:#ed1c24">LỆNH ĐẶT: ${type}</b><br>Nhập mức cược kĩ thuật:`,
+            title: 'LỆNH VTV: ' + type,
             input: 'number',
-            background: '#111',
-            color: '#fff',
-            confirmButtonColor: '#ed1c24',
-            confirmButtonText: 'XÁC NHẬN CƯỢC',
-            showCancelButton: true,
-            didOpen: () => {
-                // Ép bảng thông báo nổi lên trên cùng (không bị sảnh VIP che)
-                const container = document.querySelector('.swal2-container');
-                if (container) container.style.zIndex = '1000000';
-            }
+            background: '#111', color: '#fff',
+            confirmButtonText: 'CƯỢC NGAY',
+            didOpen: () => { document.querySelector('.swal2-container').style.zIndex = '1000001'; }
         }).then((res) => {
-            if (res.isConfirmed) {
-                let bet = parseInt(res.value);
-                
-                // KIỂM TRA TIỀN (Quý check đúng tên biến 'balance' của Quý nhé)
-                if (!bet || bet <= 0 || bet > balance) {
-                    return Swal.fire({
-                        icon: 'error',
-                        title: 'LỖI CƯỢC',
-                        text: 'Số dư không đủ!',
-                        didOpen: () => { document.querySelector('.swal2-container').style.zIndex = '1000000'; }
-                    });
-                }
-                
-                balance -= bet;
-                if (window.updateUI) updateUI();
+            if (!res.isConfirmed) return;
+            let bet = parseInt(res.value);
 
-                // Hiệu ứng Quét Sóng vệ tinh
-                let news = document.getElementById('v-news');
-                let loop = setInterval(() => {
-                    news.innerText = "SCANNING: " + Math.floor(Math.random()*9999) + "MHz";
-                    for(let i=1; i<=4; i++) {
-                        let bar = document.getElementById('vs-'+i);
-                        if(bar) bar.style.height = Math.random()*90+"%";
-                    }
-                }, 80);
-
-                setTimeout(() => {
-                    clearInterval(loop);
-                    let win = (Math.random()*100) < vVipRate;
-                    let resultMsg, barLevel;
-
-                    if (type === 'TAI' || type === 'XIU') {
-                        if (type === 'TAI') resultMsg = win ? "TĂNG TRƯỞNG VƯỢT BẬC" : "SỤT GIẢM NGHIÊM TRỌNG";
-                        else resultMsg = win ? "SỤT GIẢM NGHIÊM TRỌNG" : "TĂNG TRƯỞSNG VƯỢT BẬC";
-                        barLevel = win ? 4 : 1;
-                    } else {
-                        barLevel = win ? (type === 'CHAN' ? 2 : 3) : (type === 'CHAN' ? 1 : 2);
-                        resultMsg = "TÍN HIỆU ỔN ĐỊNH";
-                    }
-
-                    news.innerText = resultMsg;
-                    news.style.color = (win) ? "#0f0" : "#f00";
-                    for(let i=1; i<=4; i++) {
-                        let bar = document.getElementById('vs-'+i);
-                        if(bar) bar.style.height = (i <= barLevel) ? "95%" : "15%";
-                    }
-
-                    if (win) {
-                        balance += bet * 1.95;
-                        Swal.fire({ 
-                            icon:'success', title:'HỢP LỆ', text:'Khớp lệnh thành công!', 
-                            background:'#111', color:'#fff', 
-                            didOpen: () => { document.querySelector('.swal2-container').style.zIndex = '1000000'; } 
-                        });
-                    } else {
-                        Swal.fire({ 
-                            icon:'error', title:'SAI LỆCH', text:'Lỗi đường truyền vệ tinh!', 
-                            background:'#111', color:'#fff', 
-                            didOpen: () => { document.querySelector('.swal2-container').style.zIndex = '1000000'; } 
-                        });
-                    }
-                    if (window.updateUI) updateUI();
-                }, 2500);
+            // KIỂM TRA BIẾN TIỀN (Quý đổi 'balance' thành 'money' nếu web Quý dùng tên đó)
+            if (!bet || bet <= 0 || bet > balance) {
+                return Swal.fire({title:'LỖI', text:'Tiền không đủ!', icon:'error', didOpen:()=>document.querySelector('.swal2-container').style.zIndex='1000001'});
             }
+
+            balance -= bet;
+            if (window.updateUI) updateUI();
+
+            let news = document.getElementById('v-news');
+            let loop = setInterval(() => {
+                news.innerText = "SCANNING: " + Math.floor(Math.random()*9999) + "MHz";
+                for(let i=1; i<=4; i++) document.getElementById('vs-'+i).style.height = Math.random()*100+"%";
+            }, 70);
+
+            setTimeout(() => {
+                clearInterval(loop);
+                let win = (Math.random()*100) < vVipRate;
+                news.innerText = win ? "KHỚP LỆNH!" : "LỖI TÍN HIỆU!";
+                
+                if (win) {
+                    balance += bet * 1.95;
+                    Swal.fire({title:'THẮNG', icon:'success', didOpen:()=>document.querySelector('.swal2-container').style.zIndex='1000001'});
+                } else {
+                    Swal.fire({title:'THUA', icon:'error', didOpen:()=>document.querySelector('.swal2-container').style.zIndex='1000001'});
+                }
+                if (window.updateUI) updateUI();
+            }, 2000);
         });
     }
 </script>
