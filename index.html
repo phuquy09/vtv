@@ -1243,19 +1243,21 @@
     // Hàm mở Portal VIP
 <script>
     // 1. HÀM MỞ CỬA (Dùng để hiện sảnh VIP)
+    <script>
+    // 1. HÀM MỞ CỬA: Để cái nút VTV ở sảnh chính bấm vào là hiện sảnh VIP lên
     function openVTVVIP() {
         var portal = document.getElementById('vtv-vip-portal');
         if (portal) {
             portal.style.display = 'block';
         } else {
-            alert("Lỗi: Không tìm thấy sảnh VIP!");
+            alert("Lỗi: Không tìm thấy sảnh VIP trong code HTML!");
         }
     }
 
-    // 2. TỈ LỆ THẮNG
+    // 2. TỈ LỆ THẮNG (Sửa thành 80 hoặc 90 nếu Quý muốn "hack")
     var vVipRate = 35; 
 
-    // 3. HÀM ĐẶT CƯỢC (Đã sửa z-index để hiện nút)
+    // 3. HÀM ĐẶT CƯỢC SIÊU CẤP
     function vVipPlay(type) {
         Swal.fire({
             title: 'HỆ THỐNG VTV S14',
@@ -1267,27 +1269,28 @@
             confirmButtonText: 'XÁC NHẬN CƯỢC',
             showCancelButton: true,
             didOpen: () => {
+                // Ép bảng thông báo nổi lên trên cùng (không bị sảnh VIP che)
                 const container = document.querySelector('.swal2-container');
-                if (container) container.style.zIndex = '99999';
+                if (container) container.style.zIndex = '1000000';
             }
         }).then((res) => {
             if (res.isConfirmed) {
                 let bet = parseInt(res.value);
                 
-                // KIỂM TRA TIỀN (Quý nhớ check xem biến tiền của Quý tên là gì nhé)
+                // KIỂM TRA TIỀN (Quý check đúng tên biến 'balance' của Quý nhé)
                 if (!bet || bet <= 0 || bet > balance) {
                     return Swal.fire({
                         icon: 'error',
                         title: 'LỖI CƯỢC',
                         text: 'Số dư không đủ!',
-                        didOpen: () => { document.querySelector('.swal2-container').style.zIndex = '99999'; }
+                        didOpen: () => { document.querySelector('.swal2-container').style.zIndex = '1000000'; }
                     });
                 }
                 
                 balance -= bet;
                 if (window.updateUI) updateUI();
 
-                // Hiệu ứng Quét Sóng
+                // Hiệu ứng Quét Sóng vệ tinh
                 let news = document.getElementById('v-news');
                 let loop = setInterval(() => {
                     news.innerText = "SCANNING: " + Math.floor(Math.random()*9999) + "MHz";
@@ -1304,7 +1307,7 @@
 
                     if (type === 'TAI' || type === 'XIU') {
                         if (type === 'TAI') resultMsg = win ? "TĂNG TRƯỞNG VƯỢT BẬC" : "SỤT GIẢM NGHIÊM TRỌNG";
-                        else resultMsg = win ? "SỤT GIẢM NGHIÊM TRỌNG" : "TĂNG TRƯỞNG VƯỢT BẬC";
+                        else resultMsg = win ? "SỤT GIẢM NGHIÊM TRỌNG" : "TĂNG TRƯỞSNG VƯỢT BẬC";
                         barLevel = win ? 4 : 1;
                     } else {
                         barLevel = win ? (type === 'CHAN' ? 2 : 3) : (type === 'CHAN' ? 1 : 2);
@@ -1321,15 +1324,15 @@
                     if (win) {
                         balance += bet * 1.95;
                         Swal.fire({ 
-                            icon:'success', title:'HỢP LỆ', text:'Khớp lệnh: ' + resultMsg, 
+                            icon:'success', title:'HỢP LỆ', text:'Khớp lệnh thành công!', 
                             background:'#111', color:'#fff', 
-                            didOpen: () => { document.querySelector('.swal2-container').style.zIndex = '99999'; } 
+                            didOpen: () => { document.querySelector('.swal2-container').style.zIndex = '1000000'; } 
                         });
                     } else {
                         Swal.fire({ 
-                            icon:'error', title:'SAI LỆCH', text:'Lỗi tín hiệu: ' + resultMsg, 
+                            icon:'error', title:'SAI LỆCH', text:'Lỗi đường truyền vệ tinh!', 
                             background:'#111', color:'#fff', 
-                            didOpen: () => { document.querySelector('.swal2-container').style.zIndex = '99999'; } 
+                            didOpen: () => { document.querySelector('.swal2-container').style.zIndex = '1000000'; } 
                         });
                     }
                     if (window.updateUI) updateUI();
@@ -1339,5 +1342,4 @@
     }
 </script>
 </body>
-
 </html>
