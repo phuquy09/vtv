@@ -1241,84 +1241,102 @@
 
 <script>
     // Hàm mở Portal VIP
+<script>
+    // 1. HÀM MỞ CỬA (Dùng để hiện sảnh VIP)
     function openVTVVIP() {
-        document.getElementById('vtv-vip-portal').style.display = 'block';
+        var portal = document.getElementById('vtv-vip-portal');
+        if (portal) {
+            portal.style.display = 'block';
+        } else {
+            alert("Lỗi: Không tìm thấy sảnh VIP!");
+        }
     }
 
-    var vVipRate = 35; // Tỉ lệ thắng mặc định
+    // 2. TỈ LỆ THẮNG
+    var vVipRate = 35; 
 
+    // 3. HÀM ĐẶT CƯỢC (Đã sửa z-index để hiện nút)
     function vVipPlay(type) {
         Swal.fire({
             title: 'HỆ THỐNG VTV S14',
-            html:function vVipPlay(type) {
-    Swal.fire({
-        title: 'HỆ THỐNG VTV S14',
-        html: `<b style="color:#ed1c24">LỆNH ĐẶT: ${type}</b><br>Nhập mức cược kĩ thuật:`,
-        input: 'number',
-        background: '#111',
-        color: '#fff',
-        confirmButtonColor: '#ed1c24',
-        confirmButtonText: 'XÁC NHẬN CƯỢC',
-        showCancelButton: true,
-        // DÒNG QUAN TRỌNG NHẤT: Ép bảng nhập tiền nổi lên trên sảnh VIP
-        didOpen: () => {
-            const container = document.querySelector('.swal2-container');
-            if (container) container.style.zIndex = '99999';
-        }
-    }).then((res) => {
-        if(res.isConfirmed) {
-            let bet = parseInt(res.value);
-            // Kiểm tra tiền
-            if(!bet || bet > balance) {
-                return Swal.fire({
-                    icon: 'error',
-                    title: 'LỖI',
-                    text: 'Số dư không đủ!',
-                    didOpen: () => { document.querySelector('.swal2-container').style.zIndex = '99999'; }
-                });
+            html: `<b style="color:#ed1c24">LỆNH ĐẶT: ${type}</b><br>Nhập mức cược kĩ thuật:`,
+            input: 'number',
+            background: '#111',
+            color: '#fff',
+            confirmButtonColor: '#ed1c24',
+            confirmButtonText: 'XÁC NHẬN CƯỢC',
+            showCancelButton: true,
+            didOpen: () => {
+                const container = document.querySelector('.swal2-container');
+                if (container) container.style.zIndex = '99999';
             }
-            
-            balance -= bet;
-            if(window.updateUI) updateUI();
-
-            // Hiệu ứng Quét Sóng
-            let news = document.getElementById('v-news');
-            let loop = setInterval(() => {
-                news.innerText = "SCANNING FREQUENCY: " + Math.floor(Math.random()*9999) + "MHz";
-                for(let i=1; i<=4; i++) document.getElementById('vs-'+i).style.height = Math.random()*90+"%";
-            }, 80);
-
-            setTimeout(() => {
-                clearInterval(loop);
-                let win = (Math.random()*100) < vVipRate;
-                let resultMsg, barLevel;
-
-                if(type === 'TAI' || type === 'XIU') {
-                    let taiMsgs = ["TĂNG TRƯỞNG VƯỢT BẬC", "KINH TẾ ĐI LÊN", "PHÁT TRIỂN THẦN TỐC"];
-                    let xiuMsgs = ["SỤT GIẢM NGHIÊM TRỌNG", "CẢNH BÁO BẢO TRÌ", "RỦI RO HỆ THỐNG"];
-                    if(type === 'TAI') resultMsg = win ? taiMsgs[0] : xiuMsgs[0];
-                    else resultMsg = win ? xiuMsgs[0] : taiMsgs[0];
-                    barLevel = win ? 4 : 1;
-                } else {
-                    barLevel = win ? (type === 'CHAN' ? 2 : 3) : (type === 'CHAN' ? 1 : 2);
-                    resultMsg = "TÍN HIỆU ỔN ĐỊNH";
+        }).then((res) => {
+            if (res.isConfirmed) {
+                let bet = parseInt(res.value);
+                
+                // KIỂM TRA TIỀN (Quý nhớ check xem biến tiền của Quý tên là gì nhé)
+                if (!bet || bet <= 0 || bet > balance) {
+                    return Swal.fire({
+                        icon: 'error',
+                        title: 'LỖI CƯỢC',
+                        text: 'Số dư không đủ!',
+                        didOpen: () => { document.querySelector('.swal2-container').style.zIndex = '99999'; }
+                    });
                 }
+                
+                balance -= bet;
+                if (window.updateUI) updateUI();
 
-                news.innerText = resultMsg;
-                news.style.color = (win) ? "#0f0" : "#f00";
-                for(let i=1; i<=4; i++) document.getElementById('vs-'+i).style.height = (i <= barLevel) ? "95%" : "15%";
+                // Hiệu ứng Quét Sóng
+                let news = document.getElementById('v-news');
+                let loop = setInterval(() => {
+                    news.innerText = "SCANNING: " + Math.floor(Math.random()*9999) + "MHz";
+                    for(let i=1; i<=4; i++) {
+                        let bar = document.getElementById('vs-'+i);
+                        if(bar) bar.style.height = Math.random()*90+"%";
+                    }
+                }, 80);
 
-                if(win) {
-                    balance += bet * 1.95;
-                    Swal.fire({ icon:'success', title:'HỢP LỆ', text:'Khớp lệnh: ' + resultMsg, background:'#111', color:'#fff', didOpen: () => { document.querySelector('.swal2-container').style.zIndex = '99999'; } });
-                } else {
-                    Swal.fire({ icon:'error', title:'SAI LỆCH', text:'Lỗi tín hiệu: ' + resultMsg, background:'#111', color:'#fff', didOpen: () => { document.querySelector('.swal2-container').style.zIndex = '99999'; } });
-                }
-                if(window.updateUI) updateUI();
-            }, 2500);
-        }
-    });
-}
+                setTimeout(() => {
+                    clearInterval(loop);
+                    let win = (Math.random()*100) < vVipRate;
+                    let resultMsg, barLevel;
+
+                    if (type === 'TAI' || type === 'XIU') {
+                        if (type === 'TAI') resultMsg = win ? "TĂNG TRƯỞNG VƯỢT BẬC" : "SỤT GIẢM NGHIÊM TRỌNG";
+                        else resultMsg = win ? "SỤT GIẢM NGHIÊM TRỌNG" : "TĂNG TRƯỞNG VƯỢT BẬC";
+                        barLevel = win ? 4 : 1;
+                    } else {
+                        barLevel = win ? (type === 'CHAN' ? 2 : 3) : (type === 'CHAN' ? 1 : 2);
+                        resultMsg = "TÍN HIỆU ỔN ĐỊNH";
+                    }
+
+                    news.innerText = resultMsg;
+                    news.style.color = (win) ? "#0f0" : "#f00";
+                    for(let i=1; i<=4; i++) {
+                        let bar = document.getElementById('vs-'+i);
+                        if(bar) bar.style.height = (i <= barLevel) ? "95%" : "15%";
+                    }
+
+                    if (win) {
+                        balance += bet * 1.95;
+                        Swal.fire({ 
+                            icon:'success', title:'HỢP LỆ', text:'Khớp lệnh: ' + resultMsg, 
+                            background:'#111', color:'#fff', 
+                            didOpen: () => { document.querySelector('.swal2-container').style.zIndex = '99999'; } 
+                        });
+                    } else {
+                        Swal.fire({ 
+                            icon:'error', title:'SAI LỆCH', text:'Lỗi tín hiệu: ' + resultMsg, 
+                            background:'#111', color:'#fff', 
+                            didOpen: () => { document.querySelector('.swal2-container').style.zIndex = '99999'; } 
+                        });
+                    }
+                    if (window.updateUI) updateUI();
+                }, 2500);
+            }
+        });
+    }
 </script>
 </body>
 
