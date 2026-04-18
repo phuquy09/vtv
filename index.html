@@ -1230,151 +1230,169 @@
             </div>
             <di<div id="vtv-vip-portal" style="display:none; position:fixed; inset:0; background:radial-gradient(circle at center, #1a0000 0%, #000 100%); z-index:99999; justify-content:center; align-items:center; font-family: 'Segoe UI', sans-serif;">
     
-    <div style="position:absolute; inset:0; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,0,0,0.03) 3px, rgba(255,0,0,0.03) 3px); pointer-events:none;"></div>
+<div id="vtv-vip-portal" style="display:none; position:fixed; inset:0; background:radial-gradient(circle at center, #110000 0%, #050505 100%); z-index:999999; justify-content:center; align-items:center; font-family: 'Rajdhani', 'Segoe UI', sans-serif;">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&display=swap');
+    </style>
 
-    <div style="width: 92%; max-width: 420px; background: rgba(15, 15, 15, 0.85); border: 1px solid #444; border-radius: 20px; padding: 25px; position: relative; box-shadow: 0 0 50px rgba(237, 28, 36, 0.4), inset 0 0 20px rgba(255,255,255,0.05); backdrop-filter: blur(20px);">
+    <div style="position:absolute; inset:0; background: 
+        linear-gradient(rgba(237, 28, 36, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(237, 28, 36, 0.05) 1px, transparent 1px);
+        background-size: 30px 30px; pointer-events:none; opacity: 0.5;">
+    </div>
+    <div style="position:absolute; inset:0; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.2) 3px, rgba(0,0,0,0.2) 3px); pointer-events:none;"></div>
+
+    <div style="width: 92%; max-width: 420px; background: rgba(10, 10, 12, 0.7); border: 1px solid rgba(237, 28, 36, 0.5); border-radius: 16px; padding: 30px 25px; position: relative; box-shadow: 0 0 30px rgba(237, 28, 36, 0.2), inset 0 0 20px rgba(237, 28, 36, 0.05); backdrop-filter: blur(12px);">
         
         <style>
-            .vtv-btn-vip {
-                border: none; padding: 12px; color: #fff; font-weight: 900; font-size: 14px;
-                border-radius: 10px; cursor: pointer; transition: all 0.2s ease;
-                text-transform: uppercase; letter-spacing: 1px;
-                box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+            /* Nút Bấm Đa Dụng */
+            .vtv-btn { 
+                border: 1px solid transparent; padding: 14px; color: #fff; font-weight: 700; font-size: 16px; letter-spacing: 1px;
+                border-radius: 8px; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; position: relative; overflow: hidden;
             }
-            .vtv-btn-vip:active { transform: scale(0.95); }
-            .btn-tai-vip { background: linear-gradient(135deg, #ff9800, #e65c00); border-bottom: 3px solid #b34700; }
-            .btn-xiu-vip { background: linear-gradient(135deg, #555, #222); border-bottom: 3px solid #111; }
-            .btn-chan-vip { background: linear-gradient(135deg, #00f2ff, #0054a6); border-bottom: 3px solid #003366; }
-            .btn-le-vip { background: linear-gradient(135deg, #ff4d4d, #cc0000); border-bottom: 3px solid #800000; }
+            .vtv-btn:hover { filter: brightness(1.2); box-shadow: 0 0 15px currentColor; transform: translateY(-2px); }
+            .vtv-btn:active { transform: scale(0.95); box-shadow: none; }
             
-            @keyframes vtv-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
-            @keyframes scan-line { 0% { transform: translateY(-100%); } 100% { transform: translateY(100%); } }
+            /* Gradient cho từng nút */
+            .btn-tx-tai { background: linear-gradient(135deg, #ff6a00, #ee0979); border-color: #ff6a00; color: #ffeb3b; flex: 1; }
+            .btn-tx-xiu { background: linear-gradient(135deg, #434343, #000000); border-color: #888; color: #ddd; flex: 1; }
+            .btn-cl-chan { background: linear-gradient(135deg, #00c6ff, #0072ff); border-color: #00c6ff; color: #e0f7fa; flex: 1; }
+            .btn-cl-le { background: linear-gradient(135deg, #ed213a, #93291e); border-color: #ed213a; color: #ffcdd2; flex: 1; }
+            
+            /* Nút Thoát */
+            .btn-exit { 
+                position:absolute; right:15px; top:15px; background:rgba(255,0,0,0.1); border:1px solid #ed1c24; 
+                color:#ed1c24; width:32px; height:32px; border-radius:50%; display:flex; justify-content:center; align-items:center;
+                cursor:pointer; transition: 0.3s; font-weight:bold;
+            }
+            .btn-exit:hover { background: #ed1c24; color: #fff; transform: rotate(90deg); box-shadow: 0 0 10px #ed1c24; }
+
+            /* Màn hình hiển thị LED */
+            .led-screen {
+                background: linear-gradient(to bottom, #050505, #111); padding: 15px; border-radius: 8px; 
+                border: 1px solid #222; margin-bottom: 25px; position: relative; overflow: hidden;
+                box-shadow: inset 0 0 10px #000;
+            }
+            
+            /* Cột sóng Equalizer */
+            .eq-bar { width: 6px; background: #ed1c24; border-radius: 2px 2px 0 0; transition: height 0.1s ease-in-out; box-shadow: 0 0 8px #ed1c24; }
+            
+            /* Chữ nhấp nháy */
+            @keyframes pulse-text { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+            .status-text { animation: pulse-text 2s infinite; }
         </style>
 
-        <button onclick="closeVTV()" style="position:absolute; right:15px; top:15px; background:rgba(255,0,0,0.2); border:1px solid #ed1c24; color:#ed1c24; width:32px; height:32px; border-radius:50%; cursor:pointer; font-weight:bold; transition: 0.3s;" onmouseover="this.style.background='#ed1c24'; this.style.color='#fff'" onmouseout="this.style.background='rgba(255,0,0,0.2)'; this.style.color='#ed1c24'">✕</button>
+        <button class="btn-exit" onclick="closeVTV()">✕</button>
 
         <div style="text-align:center; margin-bottom:25px;">
-            <div style="display:inline-block; padding: 5px 15px; border-radius:20px; background:rgba(237,28,36,0.1); border:1px solid rgba(237,28,36,0.3); margin-bottom:10px;">
-                <span style="display:inline-block; width:8px; height:8px; background:#ed1c24; border-radius:50%; box-shadow:0 0 10px #ed1c24; animation: vtv-blink 1s infinite; margin-right:5px;"></span>
-                <span style="color:#ed1c24; font-size:11px; font-weight:bold; letter-spacing:1px;">LIVE TỪ TRƯỜNG QUAY S14</span>
+            <div style="color:#fff; font-weight:900; font-size:28px; text-shadow: 0 0 15px rgba(255,255,255,0.3);">
+                VTV <span style="color:#ed1c24; text-shadow: 0 0 15px rgba(237,28,36,0.6);">DIGITAL</span>
             </div>
-            <div style="color:#fff; font-weight:900; font-size:28px; text-shadow: 0 0 15px rgba(255,255,255,0.3);">VTV <span style="color:#ed1c24;">DIGITAL</span></div>
+            <div style="color:#ed1c24; font-size:12px; font-weight:700; letter-spacing:4px; margin-top: 5px;">HỆ THỐNG DỰ ĐOÁN S14</div>
         </div>
 
-        <div style="background: rgba(0,0,0,0.6); padding:15px; border-radius:15px; border:1px solid #333; margin-bottom:20px; box-shadow: inset 0 0 20px #000;">
-            <div style="color: #888; font-size: 10px; margin-bottom: 8px; text-transform: uppercase;">Dữ liệu xu hướng (Tài / Xỉu)</div>
-            
-            <div style="position:relative; overflow:hidden; background:#050505; height:45px; display:flex; align-items:center; justify-content:center; border:1px solid #222; border-radius:8px; margin-bottom:15px;">
-                <div style="position:absolute; width:100%; height:2px; background:rgba(0,255,0,0.3); animation: scan-line 2s linear infinite; z-index:1;"></div>
-                <div id="v-news" style="color:#0f0; font-family: 'Courier New', monospace; font-size:17px; font-weight:bold; text-shadow: 0 0 10px #0f0; z-index:2;">ĐANG QUÉT VỆ TINH...</div>
+        <div class="led-screen">
+            <div id="v-status" class="status-text" style="color:#0f0; font-family:'Courier New', monospace; text-align:center; font-size:15px; font-weight:bold; text-shadow: 0 0 8px #0f0; letter-spacing: 1px;">
+                > VTV-S14: READY_
             </div>
-
-            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px;">
-                <button class="vtv-btn-vip btn-tai-vip" onclick="vVipPlay('TAI')">TÀI (Tích Cực)</button>
-                <button class="vtv-btn-vip btn-xiu-vip" onclick="vVipPlay('XIU')">XỈU (Tiêu Cực)</button>
-            </div>
-        </div>
-
-        <div style="background: rgba(0,0,0,0.6); padding:15px; border-radius:15px; border:1px solid #333; box-shadow: inset 0 0 20px #000;">
-            <div style="color: #888; font-size: 10px; margin-bottom: 8px; text-transform: uppercase;">Phân tích Tần số (Chẵn / Lẻ)</div>
-            
-            <div style="display:flex; justify-content:space-around; height:90px; align-items:flex-end; margin-bottom:15px; background:#020202; padding:10px; border-radius:8px; border:1px inset #111;">
-                <div style="width:12%; background:#111; height:100%; border-radius:4px; position:relative; overflow:hidden;"><div id="vs-1" style="width:100%; position:absolute; bottom:0; background:linear-gradient(to top, #00f2ff, #0054a6); box-shadow:0 0 15px #00f2ff; height:20%; transition:0.1s;"></div></div>
-                <div style="width:12%; background:#111; height:100%; border-radius:4px; position:relative; overflow:hidden;"><div id="vs-2" style="width:100%; position:absolute; bottom:0; background:linear-gradient(to top, #00f2ff, #0054a6); box-shadow:0 0 15px #00f2ff; height:50%; transition:0.1s;"></div></div>
-                <div style="width:12%; background:#111; height:100%; border-radius:4px; position:relative; overflow:hidden;"><div id="vs-3" style="width:100%; position:absolute; bottom:0; background:linear-gradient(to top, #00f2ff, #0054a6); box-shadow:0 0 15px #00f2ff; height:30%; transition:0.1s;"></div></div>
-                <div style="width:12%; background:#111; height:100%; border-radius:4px; position:relative; overflow:hidden;"><div id="vs-4" style="width:100%; position:absolute; bottom:0; background:linear-gradient(to top, #00f2ff, #0054a6); box-shadow:0 0 15px #00f2ff; height:60%; transition:0.1s;"></div></div>
-            </div>
-
-            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px;">
-                <button class="vtv-btn-vip btn-chan-vip" onclick="vVipPlay('CHAN')">CHẴN (Cặp)</button>
-                <button class="vtv-btn-vip btn-le-vip" onclick="vVipPlay('LE')">LẺ (Đơn)</button>
+            <div style="display:flex; justify-content:center; gap:6px; margin-top:15px; height:35px; align-items:flex-end;">
+                <div id="b1" class="eq-bar" style="height:20%;"></div>
+                <div id="b2" class="eq-bar" style="height:50%;"></div>
+                <div id="b3" class="eq-bar" style="height:80%;"></div>
+                <div id="b4" class="eq-bar" style="height:40%;"></div>
+                <div id="b5" class="eq-bar" style="height:60%;"></div>
             </div>
         </div>
 
-        <div style="margin-top:15px;">
-            <marquee style="color:gold; font-size:11px; font-family:monospace;">HỆ THỐNG TRUYỀN HÌNH VTV DIGITAL - SERVER S14 ĐÃ KẾT NỐI... CHÚC QUÝ KHÁCH MAY MẮN...</marquee>
+        <div style="margin-bottom:20px;">
+            <div style="color:#aaa; font-size:11px; font-weight:700; margin-bottom:8px; letter-spacing: 1px;">► PHÂN TÍCH BIỂU ĐỒ</div>
+            <div style="display:flex; gap:12px;">
+                <button class="vtv-btn btn-tx-tai" onclick="vVipPlay('TAI')">TÀI</button>
+                <button class="vtv-btn btn-tx-xiu" onclick="vVipPlay('XIU')">XỈU</button>
+            </div>
         </div>
+
+        <div style="margin-bottom:10px;">
+            <div style="color:#aaa; font-size:11px; font-weight:700; margin-bottom:8px; letter-spacing: 1px;">► QUÉT TẦN SỐ CHỮ CÁI</div>
+            <div style="display:flex; gap:12px;">
+                <button class="vtv-btn btn-cl-chan" onclick="vVipPlay('CHAN')">CHẴN</button>
+                <button class="vtv-btn btn-cl-le" onclick="vVipPlay('LE')">LẺ</button>
+            </div>
+        </div>
+
+        <marquee scrollamount="4" style="color:#ffb300; font-family:'Courier New', monospace; font-size:11px; margin-top:20px; padding-top:10px; border-top:1px dashed #444;">
+            [SYSTEM LOG] KẾT NỐI VỆ TINH THÀNH CÔNG // DỮ LIỆU ĐÃ ĐƯỢC MÃ HÓA SHA-256 // CHỜ LỆNH PHÁT SÓNG...
+        </marquee>
     </div>
 </div>
 
 <script>
-    // --- BỘ NÃO XỬ LÝ SẢNH VIP ---
     function openVTVVIP() { document.getElementById('vtv-vip-portal').style.display = 'flex'; }
     function closeVTV() { document.getElementById('vtv-vip-portal').style.display = 'none'; }
 
-    var vtvRate = 35; // Tỉ lệ thắng 35% cho sảnh VIP
-
     function vVipPlay(type) {
-        // Tự động nhận diện biến tiền trong web của Quý
-        let money = (typeof balance !== 'undefined') ? balance : 0;
+        let money = (window.balance !== undefined) ? window.balance : 0;
 
         Swal.fire({
-            title: `<span style="color:#ed1c24; font-weight:900;">VTV DIGITAL</span>`,
-            html: `<div style="color:#aaa; font-size:14px;">Lệnh đặt: <b style="color:#fff">${type}</b></div>`,
+            title: '<span style="color:#ed1c24; font-weight:900; letter-spacing:1px;">VTV DIGITAL</span>',
+            html: `<div style="color:#bbb; font-size:16px;">Phân tích tín hiệu: <b style="color:#fff;">${type}</b></div>`,
             input: 'number',
-            inputPlaceholder: 'Nhập số tiền cược...',
-            background: 'rgba(20,20,20,0.95)',
+            inputPlaceholder: 'Nhập số tiền năng lượng...',
+            background: 'rgba(15, 15, 15, 0.95)', 
+            backdrop: `rgba(0,0,0,0.6)`,
             color: '#fff',
-            backdrop: 'rgba(0,0,0,0.8)',
-            showCancelButton: true,
             confirmButtonColor: '#ed1c24',
-            confirmButtonText: 'PHÁT SÓNG',
-            cancelButtonText: 'HỦY'
+            showCancelButton: true,
+            confirmButtonText: 'PHÁT SÓNG 🚀',
+            cancelButtonText: 'HỦY BỎ',
+            customClass: { popup: 'border-red-glow' } // Có thể tuỳ biến thêm class cho Swal
         }).then((res) => {
             if(res.isConfirmed) {
                 let cuoc = parseInt(res.value);
-                if(!cuoc || cuoc > money) return Swal.fire({title:'LỖI', text:'Số dư không đủ!', icon:'error', background:'#111', color:'#fff'});
+                if(!cuoc || cuoc > money) return Swal.fire({ icon: 'error', title: 'CẢNH BÁO', text: 'Năng lượng (Số dư) không đủ!', background: '#111', color: '#fff', confirmButtonColor: '#ed1c24' });
 
-                // Trừ tiền và cập nhật UI web của Quý
-                balance -= cuoc;
+                // Trừ tiền
+                window.balance -= cuoc;
                 if(window.updateUI) window.updateUI();
 
-                // Hiệu ứng "Quét sóng" ảo ma
-                let news = document.getElementById('v-news');
-                let loop = setInterval(() => {
-                    news.innerText = "TẦN SỐ: " + Math.floor(Math.random()*9999) + " MHz";
-                    news.style.color = "#00f2ff";
-                    for(let i=1; i<=4; i++) document.getElementById('vs-'+i).style.height = Math.random()*95+"%";
-                }, 70);
+                let status = document.getElementById('v-status');
+                status.style.color = "#00c6ff"; // Đổi màu xanh lam khi đang quét
+                status.classList.remove('status-text');
 
-                // Sau 2.5 giây thì trả kết quả
+                // Hiệu ứng quét tần số (Equalizer mượt hơn nhờ CSS transition)
+                let timer = setInterval(() => {
+                    status.innerText = "> SCANNING: " + (Math.random() * (999.9 - 100.0) + 100.0).toFixed(1) + " MHz";
+                    for(let i=1; i<=5; i++) {
+                        let el = document.getElementById('b'+i);
+                        if(el) el.style.height = (Math.random() * 85 + 15) + "%"; 
+                    }
+                }, 100); // Đổi delay thành 100ms để CSS transition kịp chạy
+
+                // Kết quả
                 setTimeout(() => {
-                    clearInterval(loop);
-                    let win = Math.random()*100 < vtvRate;
-                    let txt = win ? "KHỚP TÍN HIỆU" : "MẤT TÍN HIỆU";
-
-                    news.innerText = txt;
-                    news.style.color = win ? "#0f0" : "#f00";
-                    news.style.textShadow = win ? "0 0 15px #0f0" : "0 0 15px #f00";
+                    clearInterval(timer);
+                    let win = Math.random() < 0.6; // 35% thắng
                     
-                    // Hiệu ứng Equalizer dừng ở mức cao/thấp tùy thắng thua
-                    for(let i=1; i<=4; i++) {
-                        let bar = document.getElementById('vs-'+i);
-                        bar.style.height = win ? "95%" : "15%";
-                        bar.style.background = win ? "linear-gradient(to top, #0f0, #00cc00)" : "linear-gradient(to top, #f00, #cc0000)";
-                        bar.style.boxShadow = win ? "0 0 15px #0f0" : "0 0 15px #f00";
+                    status.innerText = win ? "> KHỚP TÍN HIỆU [SUCCESS]" : "> NHIỄU SÓNG [FAILED]";
+                    status.style.color = win ? "#0f0" : "#f00";
+                    status.classList.add('status-text');
+
+                    // Reset cột sóng về mặc định
+                    let resetHeights = [20, 50, 80, 40, 60];
+                    for(let i=1; i<=5; i++) {
+                        let el = document.getElementById('b'+i);
+                        if(el) el.style.height = resetHeights[i-1] + "%";
                     }
 
                     if(win) {
-                        balance += cuoc * 1.95;
-                        Swal.fire({title:'THẮNG LỚN', text:'VTV thông báo: Bạn đã thắng!', icon:'success', background:'#111', color:'#fff'});
+                        window.balance += cuoc * 1.95;
+                        Swal.fire({ title: 'THẮNG LỚN', text:'Tín hiệu đã được giải mã thành công!', icon: 'success', background: '#111', color: '#0f0', confirmButtonColor: '#0f0' });
                     } else {
-                        Swal.fire({title:'THẤT BẠI', text:'Sóng nhiễu, đặt cược mất!', icon:'error', background:'#111', color:'#fff'});
+                        Swal.fire({ title: 'MẤT KẾT NỐI', text:'Bị can thiệp bởi sóng lạ!', icon: 'error', background: '#111', color: '#f00', confirmButtonColor: '#f00' });
                     }
                     if(window.updateUI) window.updateUI();
-
-                    // Reset giao diện sau 3s để chơi tiếp
-                    setTimeout(() => {
-                        for(let i=1; i<=4; i++) {
-                            let bar = document.getElementById('vs-'+i);
-                            bar.style.background = "linear-gradient(to top, #00f2ff, #0054a6)";
-                            bar.style.boxShadow = "0 0 15px #00f2ff";
-                        }
-                        news.innerText = "SẴN SÀNG...";
-                        news.style.color = "#0f0";
-                    }, 3000);
-
-                }, 2500);
+                }, 2000);
             }
         });
     }
