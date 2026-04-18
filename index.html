@@ -1230,73 +1230,44 @@
             </div>
             <di<div id="vtv-vip-portal" style="display:none; position:fixed; inset:0; background:radial-gradient(circle at center, #1a0000 0%, #000 100%); z-index:99999; justify-content:center; align-items:center; font-family: 'Segoe UI', sans-serif;">
     
-<div id="vtv-vip-portal" style="display:none; position:fixed; inset:0; background:radial-gradient(circle at center, #110000 0%, #050505 100%); z-index:999999; justify-content:center; align-items:center; font-family: 'Rajdhani', 'Segoe UI', sans-serif;">
+<div id="vtv-vip-portal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:999999; justify-content:center; align-items:center; font-family: 'Segoe UI', sans-serif;">
     
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&display=swap');
-    </style>
+    <div style="position:absolute; inset:0; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,0,0,0.03) 3px, rgba(255,0,0,0.03) 3px); pointer-events:none;"></div>
 
-    <div style="position:absolute; inset:0; background: 
-        linear-gradient(rgba(237, 28, 36, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(237, 28, 36, 0.05) 1px, transparent 1px);
-        background-size: 30px 30px; pointer-events:none; opacity: 0.5;">
-    </div>
-    <div style="position:absolute; inset:0; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.2) 3px, rgba(0,0,0,0.2) 3px); pointer-events:none;"></div>
-
-    <div style="width: 92%; max-width: 420px; background: rgba(10, 10, 12, 0.7); border: 1px solid rgba(237, 28, 36, 0.5); border-radius: 16px; padding: 30px 25px; position: relative; box-shadow: 0 0 30px rgba(237, 28, 36, 0.2), inset 0 0 20px rgba(237, 28, 36, 0.05); backdrop-filter: blur(12px);">
+    <div style="width: 92%; max-width: 420px; background: #131722; border: 1px solid #d4af37; border-radius: 16px; padding: 25px; position: relative; box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);">
         
         <style>
-            /* Nút Bấm Đa Dụng */
-            .vtv-btn { 
-                border: 1px solid transparent; padding: 14px; color: #fff; font-weight: 700; font-size: 16px; letter-spacing: 1px;
-                border-radius: 8px; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; position: relative; overflow: hidden;
-            }
-            .vtv-btn:hover { filter: brightness(1.2); box-shadow: 0 0 15px currentColor; transform: translateY(-2px); }
-            .vtv-btn:active { transform: scale(0.95); box-shadow: none; }
+            .vtv-btn { border: none; padding: 12px; color: #fff; font-weight: bold; border-radius: 8px; cursor: pointer; transition: 0.2s; text-transform: uppercase; font-size: 14px; }
+            .vtv-btn:active { transform: scale(0.95); }
+            .btn-tx { background: linear-gradient(135deg, #1f2937, #111827); border: 1px solid #374151; color: #fff; flex: 1; }
+            .btn-tx:hover { border-color: #d4af37; color: #d4af37; }
+            .btn-cl { background: linear-gradient(135deg, #1f2937, #111827); border: 1px solid #374151; color: #fff; flex: 1; }
+            .btn-cl:hover { border-color: #3b82f6; color: #3b82f6; }
             
-            /* Gradient cho từng nút */
-            .btn-tx-tai { background: linear-gradient(135deg, #ff6a00, #ee0979); border-color: #ff6a00; color: #ffeb3b; flex: 1; }
-            .btn-tx-xiu { background: linear-gradient(135deg, #434343, #000000); border-color: #888; color: #ddd; flex: 1; }
-            .btn-cl-chan { background: linear-gradient(135deg, #00c6ff, #0072ff); border-color: #00c6ff; color: #e0f7fa; flex: 1; }
-            .btn-cl-le { background: linear-gradient(135deg, #ed213a, #93291e); border-color: #ed213a; color: #ffcdd2; flex: 1; }
+            .btn-exit { position:absolute; right:15px; top:15px; background:rgba(255,0,0,0.1); border:1px solid #ed1c24; color:#ed1c24; width:30px; height:30px; border-radius:50%; cursor:pointer; }
             
-            /* Nút Thoát */
-            .btn-exit { 
-                position:absolute; right:15px; top:15px; background:rgba(255,0,0,0.1); border:1px solid #ed1c24; 
-                color:#ed1c24; width:32px; height:32px; border-radius:50%; display:flex; justify-content:center; align-items:center;
-                cursor:pointer; transition: 0.3s; font-weight:bold;
-            }
-            .btn-exit:hover { background: #ed1c24; color: #fff; transform: rotate(90deg); box-shadow: 0 0 10px #ed1c24; }
-
-            /* Màn hình hiển thị LED */
-            .led-screen {
-                background: linear-gradient(to bottom, #050505, #111); padding: 15px; border-radius: 8px; 
-                border: 1px solid #222; margin-bottom: 25px; position: relative; overflow: hidden;
-                box-shadow: inset 0 0 10px #000;
-            }
+            /* Input cược */
+            .bet-input { width: 100%; background: #0b0e14; border: 1px solid #374151; color: #fff; padding: 12px; border-radius: 6px; text-align: center; font-size: 16px; margin-bottom: 15px; outline: none; }
+            .bet-input:focus { border-color: #d4af37; }
             
-            /* Cột sóng Equalizer */
-            .eq-bar { width: 6px; background: #ed1c24; border-radius: 2px 2px 0 0; transition: height 0.1s ease-in-out; box-shadow: 0 0 8px #ed1c24; }
-            
-            /* Chữ nhấp nháy */
-            @keyframes pulse-text { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
-            .status-text { animation: pulse-text 2s infinite; }
+            /* Màn hình LED */
+            .led-screen { background: #000; padding: 15px; border-radius: 8px; border: 1px solid #222; margin-bottom: 20px; }
+            .eq-bar { width: 6px; background: #ed1c24; border-radius: 2px 2px 0 0; transition: height 0.1s ease-in-out; }
         </style>
 
         <button class="btn-exit" onclick="closeVTV()">✕</button>
 
-        <div style="text-align:center; margin-bottom:25px;">
-            <div style="color:#fff; font-weight:900; font-size:28px; text-shadow: 0 0 15px rgba(255,255,255,0.3);">
-                VTV <span style="color:#ed1c24; text-shadow: 0 0 15px rgba(237,28,36,0.6);">DIGITAL</span>
-            </div>
-            <div style="color:#ed1c24; font-size:12px; font-weight:700; letter-spacing:4px; margin-top: 5px;">HỆ THỐNG DỰ ĐOÁN S14</div>
+        <div style="text-align:center; margin-bottom:20px;">
+            <div style="color:#ed1c24; font-weight:900; font-size:24px;">VTV DIGITAL</div>
+            <div style="color:#888; font-size:11px; margin-top:5px;">SỐ DƯ: <span id="vtv-balance" style="color:#d4af37; font-weight:bold;">0</span></div>
         </div>
 
         <div class="led-screen">
-            <div id="v-status" class="status-text" style="color:#0f0; font-family:'Courier New', monospace; text-align:center; font-size:15px; font-weight:bold; text-shadow: 0 0 8px #0f0; letter-spacing: 1px;">
-                > VTV-S14: READY_
+            <div id="v-status" style="color:#0f0; font-family:monospace; text-align:center; font-size:14px; font-weight:bold; height: 40px; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+                <span>> VTV-S14: READY_</span>
+                <span id="v-substatus" style="color:#aaa; font-size:12px; margin-top:4px;"></span>
             </div>
-            <div style="display:flex; justify-content:center; gap:6px; margin-top:15px; height:35px; align-items:flex-end;">
+            <div style="display:flex; justify-content:center; gap:5px; margin-top:15px; height:30px; align-items:flex-end;">
                 <div id="b1" class="eq-bar" style="height:20%;"></div>
                 <div id="b2" class="eq-bar" style="height:50%;"></div>
                 <div id="b3" class="eq-bar" style="height:80%;"></div>
@@ -1305,95 +1276,186 @@
             </div>
         </div>
 
-        <div style="margin-bottom:20px;">
-            <div style="color:#aaa; font-size:11px; font-weight:700; margin-bottom:8px; letter-spacing: 1px;">► PHÂN TÍCH BIỂU ĐỒ</div>
-            <div style="display:flex; gap:12px;">
-                <button class="vtv-btn btn-tx-tai" onclick="vVipPlay('TAI')">TÀI</button>
-                <button class="vtv-btn btn-tx-xiu" onclick="vVipPlay('XIU')">XỈU</button>
+        <div id="selection-area">
+            <div style="margin-bottom:15px;">
+                <div style="color:#888; font-size:11px; margin-bottom:8px;">PHÂN TÍCH BIỂU ĐỒ</div>
+                <div style="display:flex; gap:10px;">
+                    <button class="vtv-btn btn-tx" onclick="openBetPanel('TAI', 'TX')">TÀI</button>
+                    <button class="vtv-btn btn-tx" onclick="openBetPanel('XIU', 'TX')">XỈU</button>
+                </div>
+            </div>
+            <div>
+                <div style="color:#888; font-size:11px; margin-bottom:8px;">QUÉT TẦN SỐ CHỮ CÁI</div>
+                <div style="display:flex; gap:10px;">
+                    <button class="vtv-btn btn-cl" onclick="openBetPanel('CHAN', 'CL')">CHẴN</button>
+                    <button class="vtv-btn btn-cl" onclick="openBetPanel('LE', 'CL')">LẺ</button>
+                </div>
             </div>
         </div>
 
-        <div style="margin-bottom:10px;">
-            <div style="color:#aaa; font-size:11px; font-weight:700; margin-bottom:8px; letter-spacing: 1px;">► QUÉT TẦN SỐ CHỮ CÁI</div>
-            <div style="display:flex; gap:12px;">
-                <button class="vtv-btn btn-cl-chan" onclick="vVipPlay('CHAN')">CHẴN</button>
-                <button class="vtv-btn btn-cl-le" onclick="vVipPlay('LE')">LẺ</button>
+        <div id="betting-area" style="display:none; background: #1f2937; padding: 15px; border-radius: 8px; border: 1px solid #374151;">
+            <div style="color:#fff; text-align:center; margin-bottom:15px; font-size:14px;">
+                Lệnh đặt: <b id="bet-type-display" style="color:#d4af37; font-size:16px;">TÀI</b>
+            </div>
+            <input type="number" id="bet-amount" class="bet-input" placeholder="Nhập số tiền cược...">
+            <div style="display:flex; gap:10px;">
+                <button class="vtv-btn" style="background:#4b5563; flex:1;" onclick="cancelBet()">HỦY</button>
+                <button class="vtv-btn" style="background: linear-gradient(to right, #d4af37, #f3e5ab); color:#000; flex:2;" onclick="confirmBet()">PHÁT SÓNG</button>
             </div>
         </div>
 
-        <marquee scrollamount="4" style="color:#ffb300; font-family:'Courier New', monospace; font-size:11px; margin-top:20px; padding-top:10px; border-top:1px dashed #444;">
-            [SYSTEM LOG] KẾT NỐI VỆ TINH THÀNH CÔNG // DỮ LIỆU ĐÃ ĐƯỢC MÃ HÓA SHA-256 // CHỜ LỆNH PHÁT SÓNG...
-        </marquee>
     </div>
 </div>
 
 <script>
-    function openVTVVIP() { document.getElementById('vtv-vip-portal').style.display = 'flex'; }
-    function closeVTV() { document.getElementById('vtv-vip-portal').style.display = 'none'; }
+    // FIX SỐ DƯ: Khởi tạo số dư ảo nếu hệ thống game chưa có
+    if (typeof window.balance === 'undefined') {
+        window.balance = 5000000; // 5 triệu
+    }
 
-    function vVipPlay(type) {
-        let money = (window.balance !== undefined) ? window.balance : 0;
+    let currentBetType = '';
+    let currentCategory = ''; // 'TX' hoặc 'CL'
 
-        Swal.fire({
-            title: '<span style="color:#ed1c24; font-weight:900; letter-spacing:1px;">VTV DIGITAL</span>',
-            html: `<div style="color:#bbb; font-size:16px;">Phân tích tín hiệu: <b style="color:#fff;">${type}</b></div>`,
-            input: 'number',
-            inputPlaceholder: 'Nhập số tiền năng lượng...',
-            background: 'rgba(15, 15, 15, 0.95)', 
-            backdrop: `rgba(0,0,0,0.6)`,
-            color: '#fff',
-            confirmButtonColor: '#ed1c24',
-            showCancelButton: true,
-            confirmButtonText: 'PHÁT SÓNG 🚀',
-            cancelButtonText: 'HỦY BỎ',
-            customClass: { popup: 'border-red-glow' } // Có thể tuỳ biến thêm class cho Swal
-        }).then((res) => {
-            if(res.isConfirmed) {
-                let cuoc = parseInt(res.value);
-                if(!cuoc || cuoc > money) return Swal.fire({ icon: 'error', title: 'CẢNH BÁO', text: 'Năng lượng (Số dư) không đủ!', background: '#111', color: '#fff', confirmButtonColor: '#ed1c24' });
+    function updateBalanceUI() {
+        document.getElementById('vtv-balance').innerText = window.balance.toLocaleString('vi-VN') + ' VNĐ';
+        if(window.updateUI) window.updateUI(); // Gọi lại hàm update của game gốc (nếu có)
+    }
 
-                // Trừ tiền
-                window.balance -= cuoc;
-                if(window.updateUI) window.updateUI();
+    function openVTVVIP() { 
+        document.getElementById('vtv-vip-portal').style.display = 'flex'; 
+        updateBalanceUI();
+        cancelBet(); // Đảm bảo mở lên ở màn hình chọn lệnh
+    }
+    
+    function closeVTV() { 
+        document.getElementById('vtv-vip-portal').style.display = 'none'; 
+    }
 
-                let status = document.getElementById('v-status');
-                status.style.color = "#00c6ff"; // Đổi màu xanh lam khi đang quét
-                status.classList.remove('status-text');
+    // Chuyển sang màn hình nhập cược trong Panel
+    function openBetPanel(type, category) {
+        currentBetType = type;
+        currentCategory = category;
+        document.getElementById('selection-area').style.display = 'none';
+        document.getElementById('betting-area').style.display = 'block';
+        document.getElementById('bet-type-display').innerText = type;
+        document.getElementById('bet-amount').value = '';
+        document.getElementById('v-status').innerHTML = `<span>> CHUẨN BỊ PHÁT SÓNG LỆNH: ${type}</span>`;
+    }
 
-                // Hiệu ứng quét tần số (Equalizer mượt hơn nhờ CSS transition)
-                let timer = setInterval(() => {
-                    status.innerText = "> SCANNING: " + (Math.random() * (999.9 - 100.0) + 100.0).toFixed(1) + " MHz";
-                    for(let i=1; i<=5; i++) {
-                        let el = document.getElementById('b'+i);
-                        if(el) el.style.height = (Math.random() * 85 + 15) + "%"; 
-                    }
-                }, 100); // Đổi delay thành 100ms để CSS transition kịp chạy
+    // Hủy cược quay về màn hình chọn
+    function cancelBet() {
+        document.getElementById('selection-area').style.display = 'block';
+        document.getElementById('betting-area').style.display = 'none';
+        document.getElementById('v-status').innerHTML = `<span>> VTV-S14: READY_</span><span id="v-substatus"></span>`;
+    }
 
-                // Kết quả
-                setTimeout(() => {
-                    clearInterval(timer);
-                    let win = Math.random() < 0.6; // 35% thắng
-                    
-                    status.innerText = win ? "> KHỚP TÍN HIỆU [SUCCESS]" : "> NHIỄU SÓNG [FAILED]";
-                    status.style.color = win ? "#0f0" : "#f00";
-                    status.classList.add('status-text');
+    // Xử lý logic Phát Sóng
+    function confirmBet() {
+        let inputAmount = document.getElementById('bet-amount').value;
+        let cuoc = parseInt(inputAmount);
 
-                    // Reset cột sóng về mặc định
-                    let resetHeights = [20, 50, 80, 40, 60];
-                    for(let i=1; i<=5; i++) {
-                        let el = document.getElementById('b'+i);
-                        if(el) el.style.height = resetHeights[i-1] + "%";
-                    }
+        // Kiểm tra tiền hợp lệ và số dư live
+        if (!cuoc || cuoc <= 0) {
+            Swal.fire({ icon: 'warning', title: 'Lỗi', text: 'Vui lòng nhập số tiền hợp lệ!', background: '#111', color: '#fff' });
+            return;
+        }
+        if (cuoc > window.balance) {
+            Swal.fire({ icon: 'error', title: 'Không đủ lúa!', text: 'Số dư hiện tại không đủ để phát sóng.', background: '#111', color: '#fff' });
+            return;
+        }
 
-                    if(win) {
-                        window.balance += cuoc * 1.95;
-                        Swal.fire({ title: 'THẮNG LỚN', text:'Tín hiệu đã được giải mã thành công!', icon: 'success', background: '#111', color: '#0f0', confirmButtonColor: '#0f0' });
-                    } else {
-                        Swal.fire({ title: 'MẤT KẾT NỐI', text:'Bị can thiệp bởi sóng lạ!', icon: 'error', background: '#111', color: '#f00', confirmButtonColor: '#f00' });
-                    }
-                    if(window.updateUI) window.updateUI();
-                }, 2000);
+        // Bắt đầu trừ tiền NGAY LẬP TỨC để tránh lỗi spam
+        window.balance -= cuoc;
+        updateBalanceUI();
+
+        // Ẩn khu vực cược đi để tránh bấm nhiều lần
+        document.getElementById('betting-area').style.display = 'none';
+
+        let status = document.getElementById('v-status');
+        let subStatus = document.getElementById('v-substatus');
+        status.style.color = "#00c6ff"; 
+
+        // Các từ khóa để random cho Chẵn / Lẻ
+        const scanWords = ["HỆ THỐNG", "MÃ HÓA", "VỆ TINH", "TÍN HIỆU", "DỮ LIỆU", "TRUYỀN TẢI", "BẢO MẬT", "XUNG NHỊP", "TẦN SỐ", "PHÂN TÍCH",
+    "ALGORITHM", "PROTOCOL", "DATABASE", "SERVER", "BACKEND", "GATEWAY", "FIREWALL", "BITCOIN", "BLOCKCHAIN", "CYBER",
+    "TERMINAL", "CONSOLE", "NETWORK", "VIRTUAL", "HARDWARE", "SOFTWARE", "BINARY", "ENCRYPT", "DECRYPT", "PHANTOM",
+    "VECTOR", "MATRIX", "QUANTUM", "MODULE", "SATELLITE", "BROADCAST", "DIGITAL", "ANALOG", "CHIPSET", "PROCESSOR",
+    "BANDWIDTH", "LATENCY", "ROUTER", "FIREBASE", "JAVASCRIPT", "PYTHON", "NODEJS", "TELECOM", "AMPLITUDE", "SPECTRUM",
+    "OSCILLATOR", "KHÔNG GIAN", "THỜI GIAN", "BITRATE", "ETHERNET", "MAINFRAME", "MICROCHIP", "NANOTECH", "ROBOTIC",
+    "AUTOMATION", "INTERFACE", "GRAPHIC", "PIXEL", "RESOLUTION", "BANDWIDTH", "MAINFRAME", "SUPERCOMPUTER", "OPTIC",
+    "WIRELESS", "BLUETOOTH", "INFRARED", "ULTRASONIC", "MICROWAVE", "TELEMETRY", "NANOSECOND", "GIGABYTE", "TERABYTE"
+];
+        let targetWord = "";
+
+        // Hiệu ứng Scanning
+        let timer = setInterval(() => {
+            if(currentCategory === 'TX') {
+                status.innerHTML = `<span>> SCANNING FREQUENCY: ${(Math.random() * 900 + 100).toFixed(1)} MHz</span>`;
+            } else {
+                targetWord = scanWords[Math.floor(Math.random() * scanWords.length)];
+                status.innerHTML = `<span>> ĐỌC TÍN HIỆU: [ ${targetWord} ]</span>`;
             }
-        });
+            // Nháy cột sóng
+            for(let i=1; i<=5; i++) {
+                document.getElementById('b'+i).style.height = (Math.random() * 85 + 15) + "%"; 
+            }
+        }, 100);
+
+        // Kết quả sau 2.5 giây
+        setTimeout(() => {
+            clearInterval(timer);
+            
+            let isWin = false;
+            let resultText = "";
+            let resultDetail = "";
+
+            if (currentCategory === 'TX') {
+                // Logic Tài Xỉu cũ (Tỉ lệ % hoặc tự random)
+                let sysResult = Math.random() < 0.5 ? 'TAI' : 'XIU';
+                isWin = (currentBetType === sysResult);
+                resultDetail = `Tần số trả về: ${sysResult}`;
+            } 
+            else if (currentCategory === 'CL') {
+                // Logic Chẵn / Lẻ: Tính chữ cái
+                // Đếm chữ cái bỏ khoảng trắng. VD: "GIA TĂNG" -> "GIATĂNG" = 7 chữ (Lẻ)
+                let cleanWord = targetWord.replace(/\s/g, ''); 
+                let charCount = cleanWord.length;
+                let sysResult = (charCount % 2 === 0) ? 'CHAN' : 'LE';
+                
+                isWin = (currentBetType === sysResult);
+                resultDetail = `Từ: "${targetWord}" có ${charCount} chữ cái => ${sysResult}`;
+            }
+
+            // Hiển thị màn hình LED
+            status.style.color = isWin ? "#0f0" : "#f00";
+            status.innerHTML = `<span>> ${isWin ? 'KHỚP TÍN HIỆU [WIN]' : 'NHIỄU SÓNG [LOSE]'}</span>`;
+            status.innerHTML += `<span style="color:#ccc; font-size:12px; margin-top:4px;">${resultDetail}</span>`;
+
+            // Reset cột sóng
+            let resetHeights = [20, 50, 80, 40, 60];
+            for(let i=1; i<=5; i++) document.getElementById('b'+i).style.height = resetHeights[i-1] + "%";
+
+            // Cộng tiền nếu thắng
+            if(isWin) {
+                let tienThang = cuoc * 1.95;
+                window.balance += tienThang;
+                updateBalanceUI();
+            }
+
+            // Thông báo popup nhỏ
+            Swal.fire({ 
+                title: isWin ? 'THẮNG LỚN!' : 'THUA RỒI!', 
+                text: resultDetail,
+                icon: isWin ? 'success' : 'error', 
+                background: '#1a1d24', color: '#fff',
+                timer: 2500, showConfirmButton: false // Tự động đóng sau 2.5s để đỡ phải bấm
+            });
+
+            // Quay lại màn hình chọn sau khi xong
+            setTimeout(() => {
+                cancelBet();
+            }, 2500);
+
+        }, 2500);
     }
 </script>
